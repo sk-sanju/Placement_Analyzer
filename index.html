@@ -1,49 +1,190 @@
 <!DOCTYPE html>
-
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Placement Analyzer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placement Pro | Elevate Your Career</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="container">
+    <!-- --- HERO PAGE --- -->
+    <section id="hero-page">
+        <div class="hero-content">
+            <span class="hero-tag">New: AI-Powered Placement Analysis 2.0</span>
+            <h1>Your Future Career,<br>Optimized by AI.</h1>
+            <p>Placement Pro helps you analyze your readiness, identify skill gaps, and connects you with the right
+                opportunities. Join thousands of students accelerating their career.</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="showAuth()">Get Started Free</button>
+                <button class="btn-secondary" onclick="scrollToFeatures()">See How It Works</button>
+            </div>
+        </div>
+    </section>
 
-```
-<h1>🎓 Internship Placement Analyzer</h1>
+    <!-- --- AUTH OVERLAY --- -->
+    <div id="auth-overlay">
+        <div class="auth-card">
+            <div class="header" style="text-align: left; margin-bottom: 30px;">
+                <h2 style="font-size: 1.5rem; margin-bottom: 8px;">Welcome Back</h2>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Sign in to access your dashboard</p>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="username" placeholder="johndoe" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%;">Sign In</button>
+                <button type="button" class="btn-secondary" style="width: 100%; margin-top: 10px;"
+                    onclick="hideAuth()">Cancel</button>
+            </form>
+        </div>
+    </div>
 
-<form id="analyzerForm">
+    <!-- --- DASHBOARD LAYOUT --- -->
+    <div id="dashboard-layout">
+        <aside>
+            <div class="logo-area">
+                <div class="logo-circle"></div>
+                <span class="logo-text">Placement Pro</span>
+            </div>
+            <nav>
+                <ul>
+                    <li class="active" onclick="switchSection('overview')">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828765.png" class="section-img"
+                            style="width: 18px; height: 18px;">
+                        Dashboard
+                    </li>
+                    <li onclick="switchSection('analyzer')">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" class="section-img"
+                            style="width: 18px; height: 18px;">
+                        Placement Analyzer
+                    </li>
+                    <li>
+                        <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" class="section-img"
+                            style="width: 18px; height: 18px;">
+                        Job Board
+                    </li>
+                    <li>
+                        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="section-img"
+                            style="width: 18px; height: 18px;">
+                        Resources
+                    </li>
+                </ul>
+            </nav>
+            <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid var(--glass-border);">
+                <li style="margin-bottom: 0;" onclick="location.reload()">Logout</li>
+            </div>
+        </aside>
 
-    <input type="text" id="name" placeholder="Enter Your Name" required>
+        <main>
+            <header class="top-bar">
+                <h2 id="section-title">Overview</h2>
+                <div class="profile-chip">
+                    <span id="user-display">Guest</span>
+                    <div class="profile-pic"></div>
+                </div>
+            </header>
 
-    <input type="number" id="cgpa" placeholder="Enter CGPA (0 - 10)" step="0.01" min="0" max="10" required>
+            <!-- Overview Section -->
+            <section id="overview-section" class="content-section active">
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <p class="stat-title">Readiness Score</p>
+                        <p class="stat-value" id="dash-score">--</p>
+                        <p class="stat-trend up">Complete analysis to see</p>
+                    </div>
+                    <div class="stat-card">
+                        <p class="stat-title">Profile Completeness</p>
+                        <p class="stat-value">65%</p>
+                        <p class="stat-trend">+10% from last week</p>
+                    </div>
+                    <div class="stat-card">
+                        <p class="stat-title">Recommended Jobs</p>
+                        <p class="stat-value">12</p>
+                        <p class="stat-trend">Based on your skills</p>
+                    </div>
+                </div>
 
-    <select id="qualification">
-        <option value="">Select Qualification</option>
-        <option value="degree">Degree</option>
-        <option value="diploma">Diploma</option>
-    </select>
+                <div class="card-container" style="max-width: 100%;">
+                    <h3>Upcoming Preparation Tasks</h3>
+                    <p style="color: var(--text-secondary); margin-top: 10px;">Your roadmap will appear here once you
+                        complete the placement analyzer.</p>
+                </div>
+            </section>
 
-    <input type="text" id="skills" placeholder="Enter Skills (comma separated)">
+            <!-- Analyzer Section -->
+            <section id="analyzer-section" class="content-section">
+                <div class="card-container">
+                    <div class="header" style="text-align: left; margin-bottom: 40px;">
+                        <h2 style="font-size: 1.8rem; margin-bottom: 10px;">Placement Analyzer</h2>
+                        <p style="color: var(--text-secondary);">Fill in your details to get an AI-driven readiness
+                            report.</p>
+                    </div>
 
-    <select id="experience">
-        <option value="">Experience</option>
-        <option value="yes">Have Project Experience</option>
-        <option value="no">No Experience</option>
-    </select>
+                    <form id="analyzerForm" class="form-grid">
+                        <div class="form-group full-width">
+                            <label>Full Name</label>
+                            <input type="text" id="name" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label>CGPA (0-10)</label>
+                            <input type="number" id="cgpa" step="0.01" min="0" max="10" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Qualification</label>
+                            <select id="qualification" required>
+                                <option value="btech">BTech / BE</option>
+                                <option value="bsc">BSc</option>
+                                <option value="bca">BCA</option>
+                                <option value="mca">MCA</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Skills (Comma separated)</label>
+                            <input type="text" id="skills" placeholder="Python, Java, React...">
+                        </div>
+                        <div class="form-group">
+                            <label>Project Experience</label>
+                            <select id="experience">
+                                <option value="yes">Hands-on Projects</option>
+                                <option value="no">No Projects Yet</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Internship Done?</label>
+                            <select id="internship">
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Communication Proficiency</label>
+                            <select id="communication">
+                                <option value="excellent">Excellent</option>
+                                <option value="good">Good</option>
+                                <option value="average">Average</option>
+                            </select>
+                        </div>
+                        <div class="full-width">
+                            <button type="submit" class="btn-primary" style="width: auto; padding: 14px 40px;">Run AI
+                                Analysis</button>
+                        </div>
+                    </form>
 
-    <button type="submit">Analyze</button>
+                    <div id="result" class="resultBox" style="display: none; margin-top: 40px;"></div>
+                </div>
+            </section>
+        </main>
+    </div>
 
-</form>
-
-<div id="result" class="resultBox"></div>
-
-
-<div id="result" class="resultBox">Powered by Xenotrix Technologies</div>
-</div>
-
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
+
 </html>
