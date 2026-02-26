@@ -18,7 +18,7 @@
             <p>Placement Pro helps you analyze your readiness, identify skill gaps, and connects you with the right
                 opportunities. Join thousands of students accelerating their career.</p>
             <div class="hero-buttons">
-                <button class="btn-primary" onclick="showAuth()">Get Started Free</button>
+                <button class="btn-primary" id="getStartedBtn">Get Started Free</button>
                 <button class="btn-secondary" onclick="scrollToFeatures()">See How It Works</button>
             </div>
         </div>
@@ -49,19 +49,19 @@
 
     <!-- --- DASHBOARD LAYOUT --- -->
     <div id="dashboard-layout">
-        <aside>
+        <aside id="sidebar">
             <div class="logo-area">
                 <div class="logo-circle"></div>
                 <span class="logo-text">Placement Pro</span>
             </div>
             <nav>
                 <ul>
-                    <li class="active" onclick="switchSection('overview')">
+                    <li onclick="switchSection(event,'overview')">
                         <img src="https://cdn-icons-png.flaticon.com/512/1828/1828765.png" class="section-img"
                             style="width: 18px; height: 18px;">
                         Dashboard
                     </li>
-                    <li onclick="switchSection('analyzer')">
+                    <li onclick="switchSection(event,'analyzer')">
                         <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" class="section-img"
                             style="width: 18px; height: 18px;">
                         Placement Analyzer
@@ -85,6 +85,10 @@
 
         <main>
             <header class="top-bar">
+                <div class="menu-toggle" onclick="toggleSidebar()">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1828/1828859.png" alt="Menu"
+                        style="width: 24px; height: 24px; filter: invert(1);">
+                </div>
                 <h2 id="section-title">Overview</h2>
                 <div class="profile-chip">
                     <span id="user-display">Guest</span>
@@ -178,9 +182,11 @@
                         </div>
                     </form>
 
-<div id="result" class="resultBox"></div>
-
+                    <div id="result" class="resultBox" style="display: none; margin-top: 40px;"></div>
+                </div>
+            </section>
+        </main>
+    </div>
     <script src="script.js"></script>
 </body>
-
 </html>

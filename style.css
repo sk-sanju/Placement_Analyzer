@@ -169,6 +169,8 @@ aside {
     position: sticky;
     top: 0;
     height: 100vh;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1100;
 }
 
 .logo-area {
@@ -231,6 +233,22 @@ main {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 40px;
+}
+
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+    padding: 10px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.menu-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .profile-chip {
@@ -374,8 +392,24 @@ select {
     }
 
     aside {
-        display: none;
-        /* Add toggle for mobile */
+        position: fixed;
+        left: 0;
+        top: 0;
+        transform: translateX(-100%);
+        width: 280px;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    }
+
+    aside.active {
+        transform: translateX(0);
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    main {
+        padding: 20px;
     }
 }
 
@@ -391,4 +425,19 @@ select {
     .hero-buttons {
         flex-direction: column;
     }
+}
+
+#auth-overlay {
+    display: none;              /* Must be hidden initially */
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(10px);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;              /* Prevent behind hero */
+}
+
+#dashboard-layout {
+    display: none;              /* Hide dashboard initially */
 }
