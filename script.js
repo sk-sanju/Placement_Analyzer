@@ -156,3 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+
+function toggleSidebar() {
+    document.getElementById("sidebar").classList.toggle("active");
+}
