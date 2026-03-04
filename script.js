@@ -57,13 +57,22 @@ document.addEventListener("DOMContentLoaded", () => {
     // SIDEBAR TOGGLE
     // ===============================
 
+    const sidebarOverlay = document.getElementById("sidebar-overlay");
+    const menuBtn = document.getElementById("menuToggle");
+
+    // ===============================
+    // SIDEBAR TOGGLE
+    // ===============================
+
     function openSidebar() {
         sidebar.classList.add("active");
+        sidebarOverlay?.classList.add("active");
         document.body.style.overflow = "hidden";
     }
 
     function closeSidebar() {
         sidebar.classList.remove("active");
+        sidebarOverlay?.classList.remove("active");
         document.body.style.overflow = "auto";
     }
 
@@ -73,27 +82,20 @@ document.addEventListener("DOMContentLoaded", () => {
             : openSidebar();
     }
 
-    menuToggle?.addEventListener("click", toggleSidebar);
+    menuBtn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleSidebar();
+    });
+
+    sidebarOverlay?.addEventListener("click", closeSidebar);
 
     // Close sidebar when clicking nav item (mobile)
     document.querySelectorAll("nav li").forEach(item => {
         item.addEventListener("click", () => {
-            if (window.innerWidth <= 1024) {
+            if (window.innerWidth < 1024) {
                 closeSidebar();
             }
         });
-    });
-
-    // Close sidebar when clicking outside
-    document.addEventListener("click", (e) => {
-        if (
-            window.innerWidth <= 1024 &&
-            sidebar.classList.contains("active") &&
-            !sidebar.contains(e.target) &&
-            !menuToggle.contains(e.target)
-        ) {
-            closeSidebar();
-        }
     });
 
     // Close on ESC key

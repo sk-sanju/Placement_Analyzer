@@ -85,16 +85,17 @@
 
         <main>
             <header class="top-bar">
-                <div class="menu-toggle" onclick="toggleSidebar()">
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
                     <img src="https://cdn-icons-png.flaticon.com/512/1828/1828859.png" alt="Menu"
                         style="width: 24px; height: 24px; filter: invert(1);">
-                </div>
+                </button>
                 <h2 id="section-title">Overview</h2>
                 <div class="profile-chip">
                     <span id="user-display">Guest</span>
                     <div class="profile-pic"></div>
                 </div>
             </header>
+            <div id="sidebar-overlay"></div>
 
             <!-- Overview Section -->
             <section id="overview-section" class="content-section active">
@@ -124,7 +125,7 @@
             </section>
 
             <!-- Analyzer Section -->
-            <section id="analyzer-section" class="content-section"analyse>
+            <section id="analyzer-section" class="content-section" analyse>
                 <div class="card-container">
                     <div class="header" style="text-align: left; margin-bottom: 40px;">
                         <h2 style="font-size: 1.8rem; margin-bottom: 10px;">Placement Analyzer</h2>
@@ -189,4 +190,5 @@
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>
