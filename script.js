@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Close sidebar when clicking nav item (mobile)
     document.querySelectorAll("nav li").forEach(item => {
         item.addEventListener("click", () => {
-            if (window.innerWidth < 1024) {
+            if (window.innerWidth < 992) {
                 closeSidebar();
             }
         });
@@ -124,7 +124,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const titles = {
             overview: "Dashboard Overview",
-            analyzer: "Placement Analyzer"
+            analyzer: "Placement Analyzer",
+            jobs: "Recommended Jobs",
+            resources: "Learning Resources"
         };
 
         document.getElementById("section-title").innerText =
@@ -184,8 +186,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let status =
             score >= 80 ? "Elite Candidate" :
-            score >= 60 ? "Strong Candidate" :
-            "Growth Needed";
+                score >= 60 ? "Strong Candidate" :
+                    "Growth Needed";
 
         resultDiv.style.display = "block";
         resultDiv.innerHTML = `
@@ -193,11 +195,10 @@ document.addEventListener("DOMContentLoaded", () => {
             <h2 style="margin:10px 0;">${score}/100</h2>
             <p><strong>Status:</strong> ${status}</p>
             <ul style="margin-top:15px;">
-                ${
-                    suggestions.length
-                        ? suggestions.map(s => `<li>${s}</li>`).join("")
-                        : "<li>Your profile is market ready 🚀</li>"
-                }
+                ${suggestions.length
+                ? suggestions.map(s => `<li>${s}</li>`).join("")
+                : "<li>Your profile is market ready 🚀</li>"
+            }
             </ul>
         `;
 

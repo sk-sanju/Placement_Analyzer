@@ -33,6 +33,13 @@ html {
     scroll-behavior: smooth;
 }
 
+@media (max-width: 480px) {
+    html {
+        font-size: 17px;
+        /* Slightly larger base for mobile app feel */
+    }
+}
+
 body {
     font-family: 'Inter', sans-serif;
     background: var(--bg-primary);
@@ -176,7 +183,7 @@ body {
     display: grid;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 992px) {
     #dashboard-layout {
         grid-template-columns: var(--sidebar-width) 1fr;
     }
@@ -217,7 +224,7 @@ aside.active {
     display: block;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 992px) {
     aside {
         position: sticky;
         transform: translateX(0);
@@ -249,14 +256,16 @@ nav ul {
 }
 
 nav li {
-    padding: 12px 15px;
-    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    /* Larger touch target for sidebar items */
+    border-radius: 0.85rem;
     cursor: pointer;
     color: var(--text-secondary);
     display: flex;
     align-items: center;
-    gap: 10px;
-    transition: 0.2s;
+    gap: 12px;
+    transition: all 0.2s ease;
+    font-weight: 500;
 }
 
 nav li:hover,
@@ -282,7 +291,8 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
+    /* More breathing room */
     gap: 1rem;
 }
 
@@ -298,7 +308,7 @@ main {
     justify-content: center;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 992px) {
     .menu-toggle {
         display: none;
     }
@@ -345,10 +355,12 @@ main {
 }
 
 .stat-value {
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 2.25rem;
+    /* Bolder value */
+    font-weight: 800;
     margin: 0.5rem 0;
     color: white;
+    letter-spacing: -0.01em;
 }
 
 .up {
@@ -377,10 +389,11 @@ main {
 input,
 select {
     width: 100%;
-    padding: 0.875rem 1rem;
-    border-radius: 0.75rem;
+    padding: 1rem 1.25rem;
+    /* Larger padding for better touch */
+    border-radius: 0.85rem;
     border: 1px solid var(--glass-border);
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.25);
     color: white;
     font-family: inherit;
     font-size: 1rem;
@@ -397,11 +410,13 @@ select:focus {
 
 .card-container {
     background: var(--bg-tertiary);
-    padding: 2rem 1.25rem;
+    padding: 1.75rem 1rem;
+    /* More space for content, less on horizontal edges */
     border-radius: 1.5rem;
     border: 1px solid var(--glass-border);
     width: 100%;
     max-width: 56rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 @media (min-width: 768px) {
@@ -426,12 +441,29 @@ select:focus {
 
 .auth-card {
     width: 100%;
-    max-width: 25rem;
+    max-width: 28rem;
     background: var(--bg-tertiary);
-    padding: 2.5rem 2rem;
-    border-radius: 1.5rem;
+    padding: 2.5rem 1.5rem;
+    border-radius: 2rem;
     border: 1px solid var(--glass-border);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 2rem 1.25rem;
+        border-radius: 1.5rem 1.5rem 0 0;
+        /* Bottom-sheet-like feel on mobile */
+        position: fixed;
+        bottom: 0;
+        max-width: 100%;
+    }
+
+    #auth-overlay {
+        align-items: flex-end;
+        /* Align to bottom for app feel */
+        padding: 0;
+    }
 }
 
 .form-group {

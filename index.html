@@ -66,12 +66,12 @@
                             style="width: 18px; height: 18px;">
                         Placement Analyzer
                     </li>
-                    <li>
+                    <li onclick="switchSection(event,'jobs')">
                         <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" class="section-img"
                             style="width: 18px; height: 18px;">
                         Job Board
                     </li>
-                    <li>
+                    <li onclick="switchSection(event,'resources')">
                         <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="section-img"
                             style="width: 18px; height: 18px;">
                         Resources
@@ -184,6 +184,76 @@
                     </form>
 
                     <div id="result" class="resultBox" style="display: none; margin-top: 40px;"></div>
+                </div>
+            </section>
+            <!-- Jobs Section -->
+            <section id="jobs-section" class="content-section">
+                <div class="header" style="margin-bottom: 30px;">
+                    <h2 style="font-size: 1.8rem;">Recommended Jobs</h2>
+                    <p style="color: var(--text-secondary);">Jobs curated based on your readiness score.</p>
+                </div>
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <h4 style="margin-bottom: 10px;">Software Engineer</h4>
+                        <p style="color: var(--accent-blue); font-weight: 600;">Google</p>
+                        <p style="font-size: 0.9rem; margin: 10px 0;">Mountain View, CA</p>
+                        <p style="font-size: 1.1rem; font-weight: 700;">$150k - $200k</p>
+                        <button class="btn-primary" style="width: 100%; margin-top: 15px; padding: 10px;">Apply
+                            Now</button>
+                    </div>
+                    <div class="stat-card">
+                        <h4 style="margin-bottom: 10px;">Frontend Developer</h4>
+                        <p style="color: var(--accent-blue); font-weight: 600;">Meta</p>
+                        <p style="font-size: 0.9rem; margin: 10px 0;">Menlo Park, CA</p>
+                        <p style="font-size: 1.1rem; font-weight: 700;">$140k - $190k</p>
+                        <button class="btn-primary" style="width: 100%; margin-top: 15px; padding: 10px;">Apply
+                            Now</button>
+                    </div>
+                    <div class="stat-card">
+                        <h4 style="margin-bottom: 10px;">Data Scientist</h4>
+                        <p style="color: var(--accent-blue); font-weight: 600;">Amazon</p>
+                        <p style="font-size: 0.9rem; margin: 10px 0;">Seattle, WA</p>
+                        <p style="font-size: 1.1rem; font-weight: 700;">$130k - $180k</p>
+                        <button class="btn-primary" style="width: 100%; margin-top: 15px; padding: 10px;">Apply
+                            Now</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resources Section -->
+            <section id="resources-section" class="content-section">
+                <div class="header" style="margin-bottom: 30px;">
+                    <h2 style="font-size: 1.8rem;">Learning Resources</h2>
+                    <p style="color: var(--text-secondary);">Master the skills required for your dream job.</p>
+                </div>
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2436/2436636.png"
+                            style="width: 40px; filter: invert(1); margin-bottom: 15px;">
+                        <h4>DSA Preparation</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 10px 0;">Comprehensive guide
+                            to Data Structures and Algorithms.</p>
+                        <a href="#" style="color: var(--accent-blue); text-decoration: none; font-weight: 500;">Access
+                            Manual →</a>
+                    </div>
+                    <div class="stat-card">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1055/1055661.png"
+                            style="width: 40px; filter: invert(1); margin-bottom: 15px;">
+                        <h4>System Design</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 10px 0;">High-level and
+                            low-level design patterns for scalability.</p>
+                        <a href="#" style="color: var(--accent-blue); text-decoration: none; font-weight: 500;">Access
+                            Manual →</a>
+                    </div>
+                    <div class="stat-card">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135702.png"
+                            style="width: 40px; filter: invert(1); margin-bottom: 15px;">
+                        <h4>HR Interview Kit</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 10px 0;">Top HR questions and
+                            how to answer them confidently.</p>
+                        <a href="#" style="color: var(--accent-blue); text-decoration: none; font-weight: 500;">Access
+                            Manual →</a>
+                    </div>
                 </div>
             </section>
         </main>
