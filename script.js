@@ -59,6 +59,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const sidebarOverlay = document.getElementById("sidebar-overlay");
     const menuBtn = document.getElementById("menuToggle");
+    const closeBtn = document.getElementById("closeSidebar");
+    const topBar = document.querySelector(".top-bar");
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
 
     // ===============================
     // SIDEBAR TOGGLE
@@ -76,25 +79,47 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.style.overflow = "auto";
     }
 
-    function toggleSidebar() {
-        sidebar.classList.contains("active")
-            ? closeSidebar()
-            : openSidebar();
-    }
-
     menuBtn?.addEventListener("click", (e) => {
         e.stopPropagation();
-        toggleSidebar();
+        openSidebar();
     });
 
+    closeBtn?.addEventListener("click", closeSidebar);
     sidebarOverlay?.addEventListener("click", closeSidebar);
 
     // Close sidebar when clicking nav item (mobile)
     document.querySelectorAll("nav li").forEach(item => {
         item.addEventListener("click", () => {
-            if (window.innerWidth < 992) {
+            if (window.innerWidth < 1200) {
                 closeSidebar();
             }
+        });
+    });
+
+    // ===============================
+    // SCROLL EFFECTS
+    // ===============================
+
+    window.addEventListener("scroll", () => {
+        // Sticky Header Glass Effect
+        if (window.scrollY > 20) {
+            topBar?.classList.add("scrolled");
+        } else {
+            topBar?.classList.remove("scrolled");
+        }
+
+        // Scroll to Top Visibility
+        if (window.scrollY > 400) {
+            scrollTopBtn?.classList.add("visible");
+        } else {
+            scrollTopBtn?.classList.remove("visible");
+        }
+    });
+
+    scrollTopBtn?.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
         });
     });
 
