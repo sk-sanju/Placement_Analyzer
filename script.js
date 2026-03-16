@@ -162,72 +162,126 @@ document.addEventListener("DOMContentLoaded", () => {
     // ANALYZER LOGIC
     // ===============================
 
-    analyzerForm?.addEventListener("submit", (e) => {
+    analyzerForm?.addEventListener("submit", handleFormSubmit);
 
-        e.preventDefault();
+        function handleFormSubmit(event) {
+            event.preventDefault();
 
-        const name = document.getElementById("name").value;
-        const cgpa = parseFloat(document.getElementById("cgpa").value);
-        const skills = document.getElementById("skills").value.toLowerCase();
-        const experience = document.getElementById("experience").value;
-        const internship = document.getElementById("internship").value;
-        const communication = document.getElementById("communication").value;
+            const formData = getFormData();
+            const analysis = analyzeCandidate(formData);
+            displayResult(formData.name, analysis);
 
-        let score = 0;
-        let suggestions = [];
-
-        if (cgpa >= 9) score += 30;
-        else if (cgpa >= 8) score += 25;
-        else if (cgpa >= 7) {
-            score += 15;
-            suggestions.push("Improve CGPA above 8.");
-        } else {
-            score += 5;
-            suggestions.push("Focus on academic improvement.");
+            resultDiv.scrollIntoView({ behavior: "smooth" });
         }
 
-        const highDemand = ["python", "java", "react", "node", "aws", "sql"];
-        let matched = highDemand.filter(skill =>
-            skills.includes(skill)
-        ).length;
-
-        if (matched >= 3) score += 30;
-        else if (matched >= 1) {
-            score += 15;
-            suggestions.push("Expand technical stack.");
-        } else {
-            suggestions.push("Start learning core technologies.");
+        function getFormData() {
+            return {
+                name: document.getElementById("name")?.value.trim() || "Candidate",
+                cgpa: parseFloat(document.getElementById("cgpa")?.value) || 0,
+                skills: document.getElementById("skills")?.value.toLowerCase().trim() || "",
+                experience: document.getElementById("experience")?.value || "no",
+                internship: document.getElementById("internship")?.value || "no",
+                communication: document.getElementById("communication")?.value || "average"
+            };
         }
 
-        if (experience === "yes") score += 20;
-        else suggestions.push("Build portfolio projects.");
+        function analyzeCandidate({ cgpa, skills, experience, internship, communication }) {
+            let score = 0;
+            const suggestions = [];
 
-        if (internship === "yes") score += 10;
-        else suggestions.push("Apply for internships.");
+            score += calculateCgpaScore(cgpa, suggestions);
+            score += calculateSkillScore(skills, suggestions);
+            score += calculateExperienceScore(experience, suggestions);
+            score += calculateInternshipScore(internship, suggestions);
+            score += calculateCommunicationScore(communication, suggestions);
 
-        if (communication === "excellent") score += 10;
+            const status = getCandidateStatus(score);
 
-        dashScore.innerText = score + "/100";
+            return { score, status, suggestions };
+        }
 
-        let status =
-            score >= 80 ? "Elite Candidate" :
-                score >= 60 ? "Strong Candidate" :
-                    "Growth Needed";
+        function calculateCgpaScore(cgpa, suggestions) {
+            if (cgpa >= 9) return 30;
 
-        resultDiv.style.display = "block";
-        resultDiv.innerHTML = `
-            <h3>Analysis for ${name}</h3>
-            <h2 style="margin:10px 0;">${score}/100</h2>
-            <p><strong>Status:</strong> ${status}</p>
-            <ul style="margin-top:15px;">
-                ${suggestions.length
-                ? suggestions.map(s => `<li>${s}</li>`).join("")
-                : "<li>Your profile is market ready 🚀</li>"
+            if (cgpa >= 8) return 25;
+
+            if (cgpa >= 7) {
+                suggestions.push("Strengthen your profile with certifications, projects, and practical skills.");
+                return 15;
             }
-            </ul>
-        `;
 
-        resultDiv.scrollIntoView({ behavior: "smooth" });
-    });
+            suggestions.push("Focus on building strong practical skills, certifications, and project experience.");
+            return 5;
+        }
+
+        function calculateSkillScore(skills, suggestions) {
+            const highDemandSkills = ["python", "java", "react", "node", "aws", "sql", "data analysis", "machine learning", "ai", "cybersecurity", "devops", "docker", "cloud computing", "blockchain", "flutter"];
+
+            const matchedSkills = highDemandSkills.filter((skill) =>
+                skills.includes(skill)
+            ).length;
+
+            if (matchedSkills >= 3) return 30;
+
+            if (matchedSkills >= 1) {
+                suggestions.push("Expand your technical stack with more in-demand tools and technologies.");
+                return 15;
+            }
+
+            suggestions.push("Start learning core industry technologies such as Python, SQL, React, or AWS.");
+            return 0;
+        }
+
+        function calculateExperienceScore(experience, suggestions) {
+            if (experience === "yes") return 20;
+
+            suggestions.push("Build real-world portfolio projects to demonstrate your practical ability.");
+            return 0;
+        }
+
+        function calculateInternshipScore(internship, suggestions) {
+            if (internship === "yes") return 10;
+
+            suggestions.push("Apply for internships, freelance work, or virtual experience programs.");
+            return 0;
+        }
+
+        function calculateCommunicationScore(communication, suggestions) {
+            if (communication === "excellent") return 10;
+
+            if (communication === "good") return 7;
+
+            if (communication === "average") {
+                suggestions.push("Improve communication through mock interviews, presentations, and group discussions.");
+                return 5;
+            }
+
+            suggestions.push("Work on communication skills to perform better in interviews and team environments.");
+            return 0;
+        }
+
+        function getCandidateStatus(score) {
+            if (score >= 80) return "Elite Candidate";
+            if (score >= 60) return "Strong Candidate";
+            return "Growth Needed";
+        }
+
+        function displayResult(name, { score, status, suggestions }) {
+            dashScore.innerText = `${score}/100`;
+
+            resultDiv.style.display = "block";
+            resultDiv.innerHTML = `
+                <h3>Analysis for ${name}</h3>
+                <h2 style="margin:10px 0;">${score}/100</h2>
+                <p><strong>Status:</strong> ${status}</p>
+                <ul style="margin-top:15px;">
+                    ${
+                        suggestions.length > 0
+                            ? suggestions.map((item) => `<li>${item}</li>`).join("")
+                            : "<li>Your profile is market ready 🚀</li>"
+                    }
+                </ul>
+            `;
+        }
 
 });
