@@ -165,10 +165,22 @@
                         </div>
                         <div class="form-group">
                             <label>Internship Done?</label>
-                            <select id="internship">
-                                <option value="yes">Yes</option>
+                            <select id="internship" onchange="toggleInternshipDates(this.value)">
                                 <option value="no">No</option>
+                                <option value="yes">Yes</option>
                             </select>
+                        </div>
+                        <div class="form-group full-width" id="internship-dates" style="display:none;">
+                            <div class="form-grid" style="grid-template-columns:1fr 1fr; gap:20px; padding:0;">
+                                <div class="form-group" style="margin:0;">
+                                    <label>Internship Start Date</label>
+                                    <input type="date" id="internship-start">
+                                </div>
+                                <div class="form-group" style="margin:0;">
+                                    <label>Internship End Date</label>
+                                    <input type="date" id="internship-end">
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group full-width">
                             <label>Communication Proficiency</label>
