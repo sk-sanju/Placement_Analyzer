@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const formData = getFormData();
             const analysis = analyzeCandidate(formData);
-            displayResult(formData.name, analysis);
+            displayResult(formData.name, analysis, formData);
 
             resultDiv.scrollIntoView({ behavior: "smooth" });
         }
@@ -181,6 +181,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 skills: document.getElementById("skills")?.value.toLowerCase().trim() || "",
                 experience: document.getElementById("experience")?.value || "no",
                 internship: document.getElementById("internship")?.value || "no",
+                internshipStart: document.getElementById("internship-start")?.value || "",
+                internshipEnd: document.getElementById("internship-end")?.value || "",
                 communication: document.getElementById("communication")?.value || "average"
             };
         }
@@ -266,14 +268,21 @@ document.addEventListener("DOMContentLoaded", () => {
             return "Growth Needed";
         }
 
-        function displayResult(name, { score, status, suggestions }) {
+        function displayResult(name, { score, status, suggestions }, formData) {
             dashScore.innerText = `${score}/100`;
+
+            let internshipDateHtml = "";
+            if (formData.internship === "yes" && formData.internshipStart && formData.internshipEnd) {
+                const fmt = (d) => new Date(d).toLocaleDateString("en-IN", { day:"2-digit", month:"short", year:"numeric" });
+                internshipDateHtml = `<p style="margin-top:8px;"><strong>Internship Period:</strong> ${fmt(formData.internshipStart)} &ndash; ${fmt(formData.internshipEnd)}</p>`;
+            }
 
             resultDiv.style.display = "block";
             resultDiv.innerHTML = `
                 <h3>Analysis for ${name}</h3>
                 <h2 style="margin:10px 0;">${score}/100</h2>
                 <p><strong>Status:</strong> ${status}</p>
+                ${internshipDateHtml}
                 <ul style="margin-top:15px;">
                     ${
                         suggestions.length > 0
@@ -283,5 +292,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 </ul>
             `;
         }
+
+    // ===============================
+    // TOGGLE INTERNSHIP DATES
+    // ===============================
+
+    window.toggleInternshipDates = function (value) {
+        const datesRow = document.getElementById("internship-dates");
+        if (datesRow) {
+            datesRow.style.display = value === "yes" ? "block" : "none";
+        }
+    };
 
 });
